@@ -33,7 +33,7 @@ class Grid extends React.Component<GridProps, GridState> {
         }
 
         return (
-            <GridDiv>
+            <GridDiv className='grid'>
                 {gridLines.map((gridLine) => gridLine)}
             </GridDiv>
         )
