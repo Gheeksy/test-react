@@ -5,12 +5,25 @@ import Grid from './Components/Grid';
 import { AppMainDiv, AppGameDiv, AppStatsDiv, AppClickToStartP, AppResetButton } from './StyledComponents/App.styled';
 import Cards from './Fixtures/Cards.fixtures';
 import { connect } from 'react-redux';
+import { shuffle } from './Utils/shuffle.utils';
 
-class Memory extends React.Component {
-    gameTimer;
-    flipTimeout;
+type MemoryProps = {
+    cards: Array<{type: string, state: string}>,
+    setCards: Function,
+};
 
-    constructor(props) {
+type MemoryState = {
+    gameStatus: string,
+    gameTimer: number,
+    movesCount: number,
+    canTurnCards: boolean,
+};
+
+class Memory extends React.Component<MemoryProps, MemoryState> {
+    gameTimer: ReturnType<typeof setInterval> | undefined;
+    flipTimeout: ReturnType<typeof setTimeout> | undefined;
+
+    constructor(props: MemoryProps) {
         super(props);
         this.state = {
             gameStatus: 'new',
@@ -18,6 +31,9 @@ class Memory extends React.Component {
             movesCount: 0,
             canTurnCards: true,
         }
+        
+        this.gameTimer = undefined;
+        this.flipTimeout = undefined;
     }
 
     componentDidMount() {
@@ -62,13 +78,16 @@ class Memory extends React.Component {
 
     // Initialise les cartes à partir des fixtures
     initCards() {
-        const gameCards = [];
+        let gameCards = [];
         for (let i = 0; i < Cards.length; i++) {
             gameCards.push({
                 type: Cards[i],
                 state: 'idle',
             });
         }
+
+        // On mélange les cartes
+        shuffle(gameCards);
 
         this.props.setCards(gameCards);
     }
@@ -103,7 +122,7 @@ class Memory extends React.Component {
     }
 
     // Si deux cartes n'ont pas encore été retournées, et que la carte cliquée est dans l'état 'idle', on retourne la carte passée en paramètre
-    onCardClicked = (card) => {
+    onCardClicked = (card: {type: string, state: string}) => {
         if (!this.state.canTurnCards) {
             return;
         }
@@ -185,15 +204,15 @@ class Memory extends React.Component {
     }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state: any) {
     return {
         cards: state.cards
     }
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch: any) {
     return {
-        setCards: (cards) => {
+        setCards: (cards: Array<{type: string, state: string}>) => {
             dispatch({ type: "SET_CARDS", payload: cards })
         }
     }

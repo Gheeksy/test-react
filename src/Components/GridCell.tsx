@@ -1,8 +1,15 @@
 import React from 'react';
 import { GridCellDiv, GridCellImg, GridCellDivFound } from '../StyledComponents/Grid.styled';
-import images from '../images';
+import images from '../images/index';
 
-class GridCell extends React.Component {
+type GridCellProps = {
+    cellCard: {type: string, state: string},
+    onCardClicked: Function
+};
+
+type GridCellState = {};
+
+class GridCell extends React.Component<GridCellProps, GridCellState> {
     render() {
         const { cellCard, onCardClicked } = this.props;
 

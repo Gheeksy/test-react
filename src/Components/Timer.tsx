@@ -1,7 +1,13 @@
 import React from 'react';
 import { WidgetContainer, WidgetTitle, WidgetValue } from '../StyledComponents/Widget.styled';
 
-class Timer extends React.Component {
+type TimerProps = {
+    timer: number,
+};
+
+type TimerState = {};
+
+class Timer extends React.Component<TimerProps, TimerState> {
     // Formate le nombre de secondes du timer pour l'afficher au format mm:ss
     getFormattedTimer() {
         var date = new Date(0);

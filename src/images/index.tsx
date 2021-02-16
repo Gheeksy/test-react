@@ -7,7 +7,7 @@ import lettuce from './lettuce.png';
 import onion from './onion.png';
 import strawberry from './strawberry.png';
 
-const images = {
+const images: any = {
     apple: apple,
     avocado: avocado,
     banana: banana,

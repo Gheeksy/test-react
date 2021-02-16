@@ -1,7 +1,13 @@
 import React from 'react';
 import { WidgetContainer, WidgetTitle, WidgetValue } from '../StyledComponents/Widget.styled';
 
-class MoveCounter extends React.Component {
+type MoveCounterProps = {
+    count: number,
+};
+
+type MoveCounterState = {};
+
+class MoveCounter extends React.Component<MoveCounterProps, MoveCounterState> {
     render() {
         return (
             <WidgetContainer>

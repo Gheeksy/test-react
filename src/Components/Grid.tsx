@@ -2,7 +2,16 @@ import React from 'react';
 import { GridDiv } from '../StyledComponents/Grid.styled';
 import GridLine from './GridLine';
 
-class Grid extends React.Component {
+type GridProps = {
+    nbLines: number,
+    nbColumns: number,
+    cards: Array<{type: string, state: string}>,
+    onCardClicked: Function
+};
+
+type GridState = {};
+
+class Grid extends React.Component<GridProps, GridState> {
     render() {
         const { nbLines, nbColumns, cards, onCardClicked } = this.props;
 

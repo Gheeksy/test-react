@@ -1,7 +1,7 @@
 import { createStore } from 'redux'
 import cardsReducer from './Reducers/cards.reducer'
 
-const store = createStore(
+const store: ReturnType<typeof createStore> = createStore(
     cardsReducer
 )
 

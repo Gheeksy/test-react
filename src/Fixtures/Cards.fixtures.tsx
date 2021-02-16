@@ -1,4 +1,4 @@
-const Cards = [
+const Cards: Array<string> = [
     'lettuce', 'onion', 'avocado', 'lemon',
     'lettuce', 'onion', 'apple', 'lemon',
     'strawberry', 'banana', 'strawberry', 'corn',
