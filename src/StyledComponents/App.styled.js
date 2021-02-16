@@ -16,6 +16,7 @@ export const AppGameDiv = styled.div`
 export const AppClickToStartP = styled.p`
     margin: 0 0 1rem 0;
     text-align: center;
+    height: 10px;
 `;
 
 export const AppStatsDiv = styled.div`

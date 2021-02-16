@@ -1,41 +1,34 @@
-import { GridDiv, GridLineDiv, GridCellDiv, GridCellImg } from '../StyledComponents/Grid.styled';
-import images from '../images';
+import React from 'react';
+import { GridDiv } from '../StyledComponents/Grid.styled';
+import GridLine from './GridLine';
 
-function Grid(props) {
-    const { nbLines, nbColumns, cards } = props;
+class Grid extends React.Component {
+    render() {
+        const { nbLines, nbColumns, cards, onCardClicked } = this.props;
 
-    let gridLines = [];
-    for (let i = 0; i < nbLines; i++) {
-        const lineCards = cards.slice(i*nbColumns, i*nbColumns + nbColumns);
-        gridLines.push(<GridLine lineCards={lineCards} nbColumns={nbColumns} key={i.toString()} />);
+        if (cards.length === 0) {
+            return (<></>);
+        }
+
+        let gridLines = [];
+        for (let i = 0; i < nbLines; i++) {
+            const lineCards = cards.slice(i * nbColumns, i * nbColumns + nbColumns);
+            gridLines.push(
+                <GridLine
+                    lineCards={lineCards}
+                    nbColumns={nbColumns}
+                    key={i.toString()}
+                    onCardClicked={onCardClicked}
+                />
+            );
+        }
+
+        return (
+            <GridDiv>
+                {gridLines.map((gridLine) => gridLine)}
+            </GridDiv>
+        )
     }
-
-    return (
-        <GridDiv>
-            {gridLines.map((gridLine) => gridLine)}
-        </GridDiv>
-    )
-}
-
-function GridLine(props) {
-    let gridCells = [];
-    for (let i = 0; i < props.nbColumns; i++) {
-        gridCells.push(<GridCell cellCard={props.lineCards[i]} key={i.toString()} />);
-    }
-
-    return (
-        <GridLineDiv>
-            {gridCells.map((gridCell) => gridCell)}
-        </GridLineDiv>
-    )
-}
-
-function GridCell(props) {
-    return (
-        <GridCellDiv>
-            <GridCellImg alt={props.cellCard} src={images[props.cellCard]} />
-        </GridCellDiv>
-    )
 }
 
 export default Grid;
